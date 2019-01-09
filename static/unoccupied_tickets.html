@@ -1,0 +1,31 @@
+<h1>Print Unoccupied Tickets</h1>
+
+
+<table id="choose-address-table" class="ui-widget ui-widget-content">
+  <thead>
+    <tr class="ui-widget-header ">
+        <th> Id</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Berth Perference</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+         {% for post in unoccupied %}
+        <td>{{post.user_id}}</td>
+      <td>{{post.name}}</td>
+      <td>{{post.age}}</td>
+      <td>{{post.Gender}}</td>
+ <td>{{post.berth_perference}}</td>
+
+
+
+    </tr>
+     {% endfor %}
+     <H1> TOTAL TICKETS FILLED : {{count}}</H1>
+  </tbody>
+</table>
