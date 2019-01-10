@@ -9,21 +9,19 @@
       <th>Age</th>
       <th>Gender</th>
       <th>Berth Perference</th>
+         <th>Coach</th>
 
     </tr>
   </thead>
   <tbody>
     <tr>
-
          {% for post in posts %}
         <td>{{post.user_id}}</td>
       <td>{{post.name}}</td>
       <td>{{post.age}}</td>
       <td>{{post.Gender}}</td>
- <td>{{post.berth_perference}}</td>
-
-
-
+        <td>{{post.berth_perference}}</td>
+        <td>{{post.coach}}</td>
     </tr>
      {% endfor %}
      <H1> TOTAL TICKETS FILLED : {{count}}</H1>

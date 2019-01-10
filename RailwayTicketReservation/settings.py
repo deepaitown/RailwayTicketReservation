@@ -81,7 +81,6 @@ WSGI_APPLICATION = 'RailwayTicketReservation.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-print ("settting::::;;;;data:::;;",os.path.join(BASE_DIR, 'train.db'))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

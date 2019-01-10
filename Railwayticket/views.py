@@ -17,7 +17,7 @@ class TicketCreate(View):
         :param kwargs:
         :return:List all tickets
         '''
-        user_list = UserDetails.objects.all()
+        user_list = UserDetails.objects.all() # Getting user details
         return render(request, 'railwayreservation.html', {'result': user_list})
 
     def post(self, request, *args, **kwargs):
@@ -28,7 +28,7 @@ class TicketCreate(View):
         :param kwargs:
         :return: booked tickets
         '''
-        check_waiting_list = UserDetails.objects.filter(status="Waiting List").count()
+        check_waiting_list = UserDetails.objects.filter(status="Waiting List").count() # Getting user details with waiting list count
         if check_waiting_list <= 5:
             berth_per = request.POST.get('berth')
             list_count = UserDetails.objects.all().count()
@@ -98,8 +98,6 @@ def unoccupied_tickets(request):
     unoccupied_ticket_count = UserDetails.objects.filter(status="Waiting List").count()
     return render(request, 'unoccupied_tickets.html', {'unoccupied': unoccupied_ticket,'count':unoccupied_ticket_count})
 
-class AboutView(TemplateView):
-    template_name = "/static/railwayreservation.html"
 
 
 
