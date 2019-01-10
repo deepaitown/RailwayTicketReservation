@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponseRedirect
 from Railwayticket.models import UserDetails
 from django.shortcuts import render_to_response,HttpResponse
-from django.views.generic import TemplateView
 from django.views.generic import View
 
 import os.path
@@ -72,10 +71,13 @@ def cancel_ticket(request):
     :param request:
     :return: Cancelled Ticket
     '''
-    delete_obj = UserDetails.objects.filter(user_id=request.POST.get('delete_id')).delete() # delete all the ticket from database
-    objj = UserDetails.objects.filter(status="Waiting List")
-    for i in objj:
-        update_rac_to_confirm = UserDetails.objects.filter(user_id=i.user_id).update(status='RAC')
+    try:
+        delete_obj = UserDetails.objects.filter(user_id=request.POST.get('delete_id')).delete() # delete all the ticket from database
+        objj = UserDetails.objects.filter(status="Waiting List")
+        for i in objj:
+            update_rac_to_confirm = UserDetails.objects.filter(user_id=i.user_id).update(status='RAC')
+    except Exception as err:
+        print(err)
     return render(request, 'railwayreservation.html', {'Cancel_resp': "Canceled"})
 
 def booked_tickets(request):
@@ -84,8 +86,11 @@ def booked_tickets(request):
     :param request:
     :return: booked tickets and count of booked tickets
     '''
-    booked_ticket = UserDetails.objects.all()
-    booked_ticket_count = UserDetails.objects.all().count()
+    try:
+        booked_ticket = UserDetails.objects.all()
+        booked_ticket_count = UserDetails.objects.all().count()
+    except Exception as err:
+        print(err)
     return render(request, 'view.html', {'posts': booked_ticket,'count':booked_ticket_count})
 
 def unoccupied_tickets(request):
@@ -94,8 +99,11 @@ def unoccupied_tickets(request):
     :param request:
     :return:  unoccupied tickets and count of unoccupied tickets
     '''
-    unoccupied_ticket = UserDetails.objects.filter(status="Waiting List")
-    unoccupied_ticket_count = UserDetails.objects.filter(status="Waiting List").count()
+    try:
+        unoccupied_ticket = UserDetails.objects.filter(status="Waiting List")
+        unoccupied_ticket_count = UserDetails.objects.filter(status="Waiting List").count()
+    except Exception as err:
+        print(err)
     return render(request, 'unoccupied_tickets.html', {'unoccupied': unoccupied_ticket,'count':unoccupied_ticket_count})
 
 
